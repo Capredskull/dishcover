@@ -42,126 +42,60 @@ border: 1px solid #fff;
 0. CSS Reset
 ------------------------------------------------
 ----------------------------------------------*/
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
+/* Global reset styles */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-  text-decoration: none;
+  box-sizing: border-box;
 }
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  text-decoration: none;
-}
-body {
-  line-height: 1;
-}
-ol,
-ul {
+
+/* Styling for list items */
+li {
   list-style: none;
 }
-blockquote,
-q {
-  quotes: none;
-}
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
+/* Block display style for various elements */
+a,
+img,
+input,
+button {
+  display: block;
+  text-decoration: none;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
 }
-
+html {
+  font-size: var(--font-secondary);
+  font-size: var(--fs-base);
+  scroll-behavior: smooth;
+}
+body {
+  background-color: var(--background);
+  font-size: var(--fs-body-medium);
+  font-weight: var(--weight-regular);
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-block: calc(var(--header-height)+16px) var(--mobile-nav-height);
+  animation: fade 300ms var(--transition-timing-function) forwards;
+}
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+main {
+  flex-grow: 1;
+}
 /*----------------------------------------------
 ------------------------------------------------
 1. Universal Styles
@@ -245,42 +179,43 @@ table {
 }
 [data-theme="light"] {
   color-scheme: light;
-  --light-background: hsl(0, 0%, 96%);
-  --light-on-background: hsl(0, 3%, 13%);
-  --light-on-background-variant: hsl(20, 3%, 19%);
-  --light-primary: hsl(4, 82%, 67%);
-  --light-primary-hover: hsl(4, 72%, 65%);
-  --light-primary-container: hsl(14, 57%, 95%);
-  --light-error: hsl(353, 86%, 54%);
-  --light-active-indicator: hsl(12, 58%, 88%);
-  --light-image-background: hsl(0, 0%, 70%);
-  --light-badge-btn: hsl(30, 58%, 88%);
-  --light-on-badge-btn: hsl(24, 7%, 14%);
-  --light-outline: hsl(10, 19%, 88%);
-  --light-input-outline: hsl(7, 7%, 73%);
-  --light-input-outline-hover: hsl(9, 3%, 52%);
-  --light-alpha-10: hsla(0, 0%, 0%, 0.1);
-  --light-alpha-20: hsla(0, 0%, 0%, 0.2);
+  --background: var(--light-background);
+  --on-background: var(--light-on-background);
+  --on-background-variant: var(--light-on-background-variant);
+  --primary: var(--light-primary);
+  --primary-hover: var(--light-primary-hover);
+  --primary-container: var(--light-primary-container);
+  --error: var(--light-error);
+  --active-indicator: var(--light-active-indicator);
+  --image-background: var(--light-image-background);
+  --badge-btn: var(--light-badge-btn);
+  --on-badge-btn: var(--light-on-badge-btn);
+  --outline: var(--light-outline);
+  --input-outline: var(--light-input-outline);
+  --outline-hover: var(--light-input-outline-hover);
+  --alpha-10: var(--light-alpha-10);
+  --alpha-20: var(--light-alpha-20);
 }
 [data-theme="dark"] {
-  color-scheme: dark; /* dark colors */
-  --dark-background: hsl(0, 0%, 10%);
-  --dark-on-background: hsl(11, 3%, 87%);
-  --dark-on-background-variant: hsl(11, 3%, 81%);
-  --dark-primary: hsla(4, 82%, 67%, 1);
-  --dark-primary-hover: hsl(11, 51%, 51%);
-  --dark-primary-container: hsl(15, 3%, 15%);
-  --dark-error: hsl(353, 86%, 54%);
-  --dark-active-indicator: hsl(15, 25%, 22%);
-  --dark-image-background: hsl(0, 0%, 30%);
-  --dark-badge-btn: hsl(30, 28%, 13%);
-  --dark-on-badge-btn: hsl(30, 8%, 86%);
-  --dark-outline: hsl(11, 3%, 20%);
-  --dark-input-outline: hsl(11, 3%, 29%);
-  --dark-input-outline-hover: hsl(0, 4%, 58%);
-  --dark-alpha-10: hsla(0, 0%, 100%, 0.1);
-  --dark-alpha-20: hsla(0, 0%, 100%, 0.2);
+  color-scheme: dark;
+  --background: var(--dark-background);
+  --on-background: var(--dark-on-background);
+  --on-background-variant: var(--dark-on-background-variant);
+  --primary: var(--dark-primary);
+  --primary-hover: var(--dark-primary-hover);
+  --primary-container: var(--dark-primary-container);
+  --error: var(--dark-error);
+  --active-indicator: var(--dark-active-indicator);
+  --image-background: var(--dark-image-background);
+  --badge-btn: var(--dark-badge-btn);
+  --on-badge-btn: var(--dark-on-badge-btn);
+  --outline: var(--dark-outline);
+  --input-outline: var(--dark-input-outline);
+  --outline-hover: var(--dark-input-outline-hover);
+  --alpha-10: var(--dark-alpha-10);
+  --alpha-20: var(--dark-alpha-20);
 }
+
 /*----------------------------------------------
 ------------------------------------------------
 2. Header & Nav Styles
@@ -289,10 +224,10 @@ table {
 .navbar,
 .header,
 .btn-primary {
-  display: block;
+  display: none;
 }
 .header {
-  background-color: var(--light-background);
+  background-color: var(--background);
   position: fixed;
   top: 0;
   left: 0;
@@ -302,15 +237,16 @@ table {
   align-items: center;
   gap: 20px;
   padding-inline: 16px;
-  border-block-end: 1px solid var(--light-outline);
+  border-block-end: 1px solid var(--outline);
   z-index: 4;
 }
 
 .theme-switch {
   margin-inline-start: auto;
 }
-[data-theme="light"]:where(.logo-dark, .theme-switch, .light-icon),
-[data-theme="dark"]:where(.logo-light, .theme-switch, .dark-icon) {
+
+[data-theme="light"]:where(.logo-dark, .theme-switch .light-icon),
+[data-theme="dark"]:where(.logo-light, .theme-switch .dark-icon) {
   display: none !important;
 }
 /*----------------------------------------------
@@ -354,7 +290,7 @@ table {
   transition: var(--transition-short);
   z-index: -1;
 }
-.has-state:where(:hover, :focus-visible):not(:active) {
+.has-state:where(:hover, :focus-visible):not(:active)::after {
   background-color: var(--light-alpha-10);
 }
 .material-symbols-outlined {
@@ -370,7 +306,7 @@ table {
   width: 40px;
   display: grid;
   place-items: center;
-  background-color: var(--light-primary-container);
+  background-color: var(--primary-container);
   border-radius: var(--radius-circle);
 }
 
